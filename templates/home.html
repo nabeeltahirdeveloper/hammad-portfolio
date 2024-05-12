@@ -47,7 +47,7 @@
                 <div class="text-2">Hammad Qadeer</div>
                 <div class="text-3">And I'm a <span class="typing"></span></div>
                 <div class="classbox">
-                <a href="#">Hire me</a>
+                <a href="#contact">Hire me</a>
             </div>
             </div>
         </div>
@@ -59,12 +59,13 @@
             <h2 class="title">About me</h2>
             <div class="about-content">
                 <div class="column left">
-                    <img src="https://images.pexels.com/photos/2050979/pexels-photo-2050979.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="img">
+                    <img src={{about_me[2]}} alt="img">
                 </div>
                 <div class="column right">
                     <div class="text">I'm Hammad. and I'm a <span class="typing-2"></span></div>
-                    <p> And I am 17 years  young boy with  dynamic and enthusiastic person looking for the job Web Design and Development mostly specializing in front end development. A firm believer in my own abilities, I am also a
-                        team player who thrives in a challenging environment.I am a fresher with new and dynamics project ideas. Well-versed in numerous programming languages including HTML5,PHP,MySQL, JavaScript,Python and strong background in project management and customer relations.  </p>
+                    <p>
+                    {{about_me[1]}}    
+                    </p>
                     <a href="cv/sample.pdf" download="cv/sample.pdf">Download CV</a>
                 </div>
             </div>
@@ -131,57 +132,49 @@
             <div class="skills-content">
                 <div class="column left">
                     <div class="text">My creative skills & experiences.</div>
-                    <p>Since beginning my journey as a freelance developer nearly 1 month ago, I’ve done remote work for agencies, consulted for startups, and collaborated with talented people to create web products for both business and consumer use.
-                        <br><br>
-                        I create successful responsive websites that are fast, easy to use, and built with best practices. The main area of my expertise is front-end development, HTML, CSS, JS, building small and medium web apps, custom plugins, features, animations, and coding interactive layouts.
-                        <br><br>
-                        I also have full-stack developer experience with popular open-source CMS like (WordPress, bubble.io and others) .
-                        <br> 
-                        Visit my<a href="https://www.facebook.com/" target="-blank" id="link">Facebook</a>for more details<a href="#contact" id="link">contact</a>me.
-
-                    </p>
+                    {{skills[1] | safe}}
                     <a href="#contact">Learn more</a>
                 </div>
                 <div class="column right">
                     <div class="bars">
                         <div class="info">
                             <span>HTML</span>
-                            <span>90%</span>
+                            <span>{{skills[2]}}%</span>
                         </div>
                         <div class="line html"></div>
                     </div>
                     <div class="bars">
                         <div class="info">
                             <span>CSS</span>
-                            <span>60%</span>
+                            <span>{{skills[3]}}%</span>
                         </div>
                         <div class="line css"></div>
                     </div>
                     <div class="bars">
                         <div class="info">
                             <span>JavaScript</span>
-                            <span>50%</span>
+                            <span>{{skills[4]}}%</span>
                         </div>
                          <div class="line js"></div>
                     </div>
                 <div class="bars">
                         <div class="info">
                             <span>Adobe Photoshop</span>
-                            <span>50%</span>
+                            <span>{{skills[5]}}%</span>
                         </div>
                         <div class="line php"></div>
                     </div>
                     <div class="bars">
                         <div class="info">
                             <span>Corel Draw</span>
-                            <span>85%</span>
+                            <span>{{skills[6]}}%</span>
                         </div>
                         <div class="line mysql"></div>
                     </div>
                     <div class="bars">
                         <div class="info">
                             <span>WordPress</span>
-                            <span>75%</span>
+                            <span>{{skills[7]}}%</span>
                         </div>
                         <div class="line wordpress"></div>
                     </div>
@@ -195,38 +188,17 @@
         <div class="max-width">
             <h2 class="title">My Projects</h2>
             <div class="carousel owl-carousel">
+                {%for project in projects%}
                 <div class="card">
                     <div class="box">
-                        <img src="https://images.pexels.com/photos/1108117/pexels-photo-1108117.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="img">
-                        <div class="text">SJS Hot N' Spicy</div>
-                        <p>SJS hot n spicy is and resturant project . </p>
+                        <img src={{project[1]}}>
+                        <div class="text"> {{project[2]}}</div>
+                        <p>{{project[3]}}</p>
                         <a href="/" class="project" target="_blank">View Project</a>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="box">
-                        <img src="https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="img">
-                        <div class="text">Buger House</div>
-                        <p>Lorem ipsum dolor sit amet.</p>
-                        <a href="/" class="project" target="_blank">View project</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="box">
-                        <img src="https://images.pexels.com/photos/1804577/pexels-photo-1804577.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="img">
-                        <div class="text">Deep IT Institute</div>
-                        <p>Deep Computer is an institution project .</p>
-                        <a href="/" class="project" target="_blank">View Project</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="box">
-                        <img src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="img">
-                        <div class="text">NRD Computers</div>
-                        <p>NRD Computer is an eCommerce project.</p>
-                        <a href="/" class="project" target="_blank">View Project</a>
-                    </div>
-                </div>
+                {%endfor%}
+               
             </div>
         </div>
     </section>
@@ -265,20 +237,20 @@
                 </div>
                 <div class="column right">
                     <div class="text">Message me</div>
-                    <form action="#">
+                    <form action="/send_mail" method="POST">
                         <div class="fields">
                             <div class="field name">
-                                <input type="text" placeholder="Name" required>
+                                <input name="name" type="text" placeholder="Name" required>
                             </div>
                             <div class="field email">
-                                <input type="email" placeholder="Email" required>
+                                <input type="email" name="email" placeholder="Email" required>
                             </div>
                         </div>
                         <div class="field">
-                            <input type="text" placeholder="Subject" required>
+                            <input type="text" placeholder="Subject" name="subject" required>
                         </div>
                         <div class="field textarea">
-                            <textarea cols="30" rows="10" placeholder="Message.." required></textarea>
+                            <textarea cols="30" rows="10" placeholder="Message.." name="message" required></textarea>
                         </div>
                         <div class="button-area">
                             <button type="submit">Send message</button>

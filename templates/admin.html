@@ -1,34 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - Blog</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="../static/style.css">
+
 </head>
+
 <body>
-    <header>
-        <h1>Admin Panel</h1>
-    </header>
+    <div class="sidebar" style="background-color: #f1f1f1; padding: 20px; display:flex; height: 100vh;">
+        <ul
+            style="list-style-type: none; padding: 0; flex:1; border-right: 1px solid grey; display: flex; flex-direction: column; gap:50px">
+            <li
+            onclick="toggleForm('about')"
+            
+            style="margin-bottom: 10px;"><p style="text-decoration: none; color: #333;"
+                >About Me</p></li>
+            <li
+            onclick="toggleForm('skills')"
+            
+            style="margin-bottom: 10px;"><p style="text-decoration: none; color: #333;"
+                >My Skills</p></li>
+            <li
+            onclick="toggleForm('projects')"
+            
+            ><p style="text-decoration: none; color: #333;"
+                >My Projects</p></li>
+            <li
+            onclick="toggleForm('messages')"
+            
+            ><p style="text-decoration: none; color: #333;"
+                >My Messages</p></li>
+        </ul>
+        <div style="flex:4; width: 100%;">
+            <div class="about-form">
+                <h2>About Me</h2>
+                <form action="/admin/about" method="POST">
+                    
+                        <input type="text" name="profile" value={{about_me[2]}} placeholder="Profile URL" required>
+                    
+                    
+                        <textarea type="text" name="description" placeholder="Description" required 
 
-    <main>
-        <form action="{{ url_for('admin') }}" method="post">
-            <div>
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title" required>
+                        >
+                        {{about_me[1]}}
+                        </textarea>
+                
+                    
+                        <input type="submit" value="Update">
+                    
+                </form>
             </div>
-            <div>
-                <label for="content">Content:</label>
-                <textarea id="content" name="content" required></textarea>
-            </div>
-            <div>
-                <button type="submit">Add Post</button>
-            </div>
-        </form>
-    </main>
+            <div class="skills-form">
+                <h2>My Skills</h2>
+                <form action="/admin/skills" method="POST">
+                   
+                        <textarea type="text" name="skill" placeholder="Skill Description" required>
+                        {{skills[1]}}
+                        </textarea>
+                   
+                        <input value={{skills[2]}} type="text" name="htmlLevel" placeholder="HTML Level" required>
 
-    <footer>
-        <p>Blog Administration</p>
+                        <input value={{skills[3]}} type="text" name="cssLevel" placeholder="CSS Level" required>
+
+                        <input value={{skills[4]}} type="text" name="jsLevel" placeholder="JS Level" required>
+
+                        <input value={{skills[5]}} type="text" name="adobeLevel" placeholder="Adobe Level" required>
+
+                        <input value={{skills[6]}} type="text" name="corelLevel" placeholder="Corel Level" required>
+
+                        <input value={{skills[7]}} type="text" name="wordpressLevel" placeholder="Wordpress Level" required>
+                   
+                        <input type="submit" value="Update">
+                 
+                </form>
+            </div>
+            <div class="projects-form">
+                <h2>My Projects</h2>
+                <form action="/admin/projects" method="POST">
+               
+                        <input type="text" name="profilePic" placeholder="Profile Picture URL" required>
+
+                        <input type="text" name="title" placeholder="Title" required>
+                
+                        <input type="text" name="description" placeholder="Description" required>
+                   
+                        <input type="submit" value="Save">
+                   
+                </form>
+                <div
+                class="projects-list"
+                >
+
+                    <table>
+                        <tr>
+                            <th>Profile Picture</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                        {% for project in projects %}
+                        <tr>
+                            <td><img src="{{ project[1] }}" alt="Profile Picture" style="width: 100px; height: 100px;"></td>
+                            <td>{{ project[2] }}</td>
+                            <td>{{ project[3] }}</td>
+                            <td>
+                                <a href="/admin/projects/{{ project[0] }}/delete">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+            </div>
+            </div>
+            <div class="messages-form">
+                <h2>Messages</h2>
+               
+                        <table>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Subject</th>
+                                <th>Message</th>
+
+                            </tr>
+                            {% for message in messages %}
+                            <tr>
+                                <td>{{ message[1] }}</td>
+                                <td>{{ message[2] }}</td>
+                                <td>{{ message[3] }}</td>
+                                <td>{{ message[4] }}</td>
+                            </tr>
+                            {% endfor %}
+                           
+                        </table>
+                   
+            </div>
+
+        </div>
+    </div>
     </footer>
+
+
+    <script>
+        function toggleForm(form) {
+            var forms = document.querySelectorAll('.about-form, .skills-form, .projects-form , .messages-form');
+            forms.forEach(function (f) {
+                console.log(f.classList)
+                if (f.classList.contains(form + '-form')) {
+                    f.style.display = 'flex';
+                } else {
+                    f.style.display = 'none';
+                }
+            });
+        }
+
+        toggleForm('about');
+
+    </script>
 </body>
+
 </html>

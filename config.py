@@ -1,12 +1,32 @@
 from flask import Flask
 from flask_mysqldb import MySQL
 import yaml
+import MySQLdb
 
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_DB'] = 'flask_blog'
+# Temporarily remove database name for initial connection
+# app.config['MYSQL_DB'] = 'portfoliodb'
 app.config['MYSQL_UNIX_SOCKET'] = '/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock'
+
+def create_database():
+    # Create a direct connection without database
+    conn = MySQLdb.connect(
+        host=app.config['MYSQL_HOST'],
+        user=app.config['MYSQL_USER'],
+        unix_socket=app.config['MYSQL_UNIX_SOCKET']
+    )
+    cursor = conn.cursor()
+    
+    # Create database if it doesn't exist
+    cursor.execute("CREATE DATABASE IF NOT EXISTS portfoliodb")
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+# Initialize MySQL after database creation
+app.config['MYSQL_DB'] = 'portfoliodb'  # Add database name back
 mysql = MySQL(app)
 
 def create_and_populate_tables():
@@ -48,6 +68,15 @@ def create_and_populate_tables():
         
         );
     ''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS pages (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(255),
+            image VARCHAR(255),
+            title VARCHAR(255),
+            description TEXT
+        );
+    ''')
 
     # Insert dummy data if table is empty
     cursor.execute("SELECT COUNT(*) FROM projects")
@@ -67,4 +96,5 @@ def create_and_populate_tables():
 
 if __name__ == '__main__':
     with app.app_context():
-        create_and_populate_tables()
+        create_database()  # Create database first
+        create_and_populate_tables()  # Then create and populate tables

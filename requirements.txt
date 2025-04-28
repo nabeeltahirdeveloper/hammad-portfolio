@@ -4,14 +4,14 @@ charset-normalizer==3.3.2
 click==8.1.7
 Flask==3.0.0
 Flask-Login==0.6.3
-Flask-MySQLdb==2.0.0
+Flask-MySQLdb
 Flask-SQLAlchemy==3.1.1
-greenlet==3.0.1
+greenlet
 idna==3.7
 itsdangerous==2.1.2
 Jinja2==3.1.2
 MarkupSafe==2.1.3
-mysqlclient==2.2.1
+mysqlclient
 PyYAML==6.0.1
 requests==2.31.0
 SQLAlchemy==2.0.23

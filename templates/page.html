@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page[3] }} - My Portfolio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="max-width">
+            <div class="logo"><a href="{{ url_for('home') }}">Hammad<span>Qadeer</span></a></div>
+            <ul class="menu">
+                <li><a href="{{ url_for('home') }}#home" class="menu-btn">Home</a></li>
+                <li><a href="{{ url_for('home') }}#about" class="menu-btn">About</a></li>
+                <li><a href="{{ url_for('home') }}#services" class="menu-btn">Services</a></li>
+                <li><a href="{{ url_for('home') }}#skills" class="menu-btn">Skills</a></li>
+                <li><a href="{{ url_for('home') }}#teams" class="menu-btn">Teams</a></li>
+                <li><a href="{{ url_for('home') }}#contact" class="menu-btn">Contact</a></li>
+            </ul>
+            <div class="menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-content">
+        <div class="max-width">
+            <h2 class="title">{{ page[3] }}</h2>
+            <div class="page-content">
+                <div class="column left">
+                    <img src="{{ page[2] }}" alt="{{ page[3] }}" class="page-image">
+                </div>
+                <div class="column right">
+                    <div class="text">{{ page[3] }}</div>
+                    <p>{{ page[4] }}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Copyright © 2023. All rights reserved.</p>
+    </footer>
+</body>
+</html> 

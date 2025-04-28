@@ -31,6 +31,9 @@
                 <li><a href="#services" class="menu-btn">Services</a></li>
                 <li><a href="#skills" class="menu-btn">Skills</a></li>
                 <li><a href="#teams" class="menu-btn">Teams</a></li>
+                {%for page in pages%}
+                <li><a href="{{ url_for('view_page', page_name=page[1]) }}" class="menu-btn">{{page[3]}}</a></li>
+                {%endfor%}
                 <li><a href="#contact" class="menu-btn">Contact</a></li>
             </ul>
             <div class="menu-btn">
@@ -59,12 +62,12 @@
             <h2 class="title">About me</h2>
             <div class="about-content">
                 <div class="column left">
-                    <img src={{about_me[2]}} alt="img">
+                    <img src={{about_me[1]}} alt="img" class="about-me-image">
                 </div>
                 <div class="column right">
                     <div class="text">I'm Hammad. and I'm a <span class="typing-2"></span></div>
                     <p>
-                    {{about_me[1]}}    
+                    {{about_me[2]}}    
                     </p>
                     <a href="cv/sample.pdf" download="cv/sample.pdf">Download CV</a>
                 </div>
@@ -191,9 +194,9 @@
                 {%for project in projects%}
                 <div class="card">
                     <div class="box">
-                        <img src={{project[1]}}>
-                        <div class="text"> {{project[2]}}</div>
-                        <p>{{project[3]}}</p>
+                        <img src={{project[3]}}>
+                        <div class="text"> {{project[1]}}</div>
+                        <p>{{project[2]}}</p>
                         <a href="/" class="project" target="_blank">View Project</a>
                     </div>
                 </div>
@@ -202,6 +205,27 @@
             </div>
         </div>
     </section>
+
+    <!-- Pages section start -->
+    {%for page in pages%}
+    <section class="pages" id="{{page[1]}}">
+        <div class="max-width">
+            <h2 class="title">{{page[1]}}</h2>
+            <div class="pages-content">
+                <div class="column left">
+                    <img src={{page[2]}} alt="img" class="pages-image">
+                </div>
+                <div class="column right">
+                    <div class="text">{{page[3]}}</div>
+                    <p>
+                    {{page[4]}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <hr
+    {%endfor%}
 
     <!-- contact section start -->
     <section class="contact" id="contact">

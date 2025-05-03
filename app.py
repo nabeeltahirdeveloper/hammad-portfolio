@@ -406,6 +406,31 @@ def edit_page(id):
     cursor = mysql.connection.cursor()
     cursor.execute("SELECT * FROM pages WHERE id = %s", (id,))
     page = cursor.fetchone()
+    
+    # Fetch all required data for the admin template
+    cursor.execute("SELECT * FROM projects")
+    projects = cursor.fetchall()
+
+    cursor.execute("SELECT * FROM pages")
+    pages = cursor.fetchall()
+
+    cursor.execute("SELECT * FROM skills")  
+    skills = cursor.fetchall()
+    firstSkill = skills[0]
+
+    cursor.execute("SELECT * FROM about_me")
+    about_me = cursor.fetchall()
+    firstAboutMe = about_me[0]
+
+    cursor.execute("SELECT * FROM messages")
+    messages = cursor.fetchall()
+    
+    cursor.execute("SELECT * FROM users WHERE status = 'pending'")
+    pending_users = cursor.fetchall()
+    
+    cursor.execute("SELECT * FROM users WHERE status = 'approved'")
+    approved_users = cursor.fetchall()
+
     cursor.close()
     
     if not page:
@@ -427,7 +452,15 @@ def edit_page(id):
         flash('Page updated successfully!')
         return redirect(url_for('admin'))
     
-    return render_template('admin.html', edit_page=page)
+    return render_template('admin.html', 
+                         edit_page=page,
+                         projects=projects,
+                         skills=firstSkill,
+                         about_me=firstAboutMe,
+                         messages=messages,
+                         pages=pages,
+                         pending_users=pending_users,
+                         approved_users=approved_users)
 
 @app.route('/page/<string:page_name>')
 def view_page(page_name):

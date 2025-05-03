@@ -539,12 +539,24 @@
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
             });
-            event.currentTarget.classList.add('active');
+            
+            // Add active class to the clicked nav link if an event is available
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            }
         }
 
-        // Show first section by default
+        // Show appropriate section on page load
         document.addEventListener('DOMContentLoaded', function() {
-            document.querySelector('.nav-link').click();
+            {% if edit_page %}
+                // If we're editing a page, show the pages section
+                toggleForm('pages');
+                // Find and activate the pages nav link
+                document.querySelector('.nav-link[onclick="toggleForm(\'pages\')"]').classList.add('active');
+            {% else %}
+                // Show first section by default
+                document.querySelector('.nav-link').click();
+            {% endif %}
         });
     </script>
 </body>
